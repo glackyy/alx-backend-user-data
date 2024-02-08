@@ -24,6 +24,11 @@ class RedactingFormatter(logging.Formatter):
 
     def __init__(self):
         super(RedactingFormatter, self).__init__(self.FORMAT)
+        self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        NotImplementedError
+        """Redacting the message of log record instance"""
+        message = super(RedactingFormatter, self).format(record)
+        redacted = filter_datum(self.fields, self.REDACTION,
+                                message, self.SEPARATOR)
+        return redacted
