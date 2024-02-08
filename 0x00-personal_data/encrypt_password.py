@@ -9,4 +9,3 @@ def hash_password(password: str) -> bytes:
     bc = password.encode()
     hashed = hashpw(bc, bcrypt.gensalt())
     return hashed
-
