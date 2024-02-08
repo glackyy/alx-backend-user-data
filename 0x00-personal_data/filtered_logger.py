@@ -2,6 +2,7 @@
 """filtered logger module"""
 from typing import List
 import re
+import logging
 
 
 def filter_datum(fields: List[str], redaction: str,
