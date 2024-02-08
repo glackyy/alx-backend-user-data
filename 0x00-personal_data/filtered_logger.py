@@ -74,7 +74,7 @@ def main():
     fields = cursor.column_names
     for row in cursor:
         message = "".join("{}={};".format(k, val)
-        for k, val in zip(fields, row))
+                          for k, val in zip(fields, row))
         logger.info(message.strip())
     cursor.close()
     db.close()
