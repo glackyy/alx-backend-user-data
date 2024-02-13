@@ -23,7 +23,22 @@ def before_req():
     if auth is None:
         pass
     else:
-        
+        excluded = [
+            '/api/v1/status',
+            '/api/v1/unauthorized',
+            '/api/v1/forbidden'
+        ]
+        if auth.require_auth(request.path, excluded):
+            if auth.authorization_header(request) is None:
+                abort(401, description="Unauthorized")
+            if auth.current_user(request) is None:
+                abort(403, description="Forbidden")
+
+
+@app.errorhandler(404)
+def unauthorized(error) -> str:
+    """Requesting unauthorized handler"""
+    return jsonify({"error": "Unauthorized"}), 401
 
 
 if __name__ == "__main__":
