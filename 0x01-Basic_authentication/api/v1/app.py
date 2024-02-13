@@ -43,7 +43,7 @@ def before_req():
                 abort(403, description="Forbidden")
 
 
-@app.errorhandler(404)
+@app.errorhandler(401)
 def unauthorized(error) -> str:
     """Requesting unauthorized handler"""
     return jsonify({"error": "Unauthorized"}), 401
