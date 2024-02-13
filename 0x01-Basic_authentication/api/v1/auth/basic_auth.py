@@ -72,9 +72,9 @@ class BasicAuth(Auth):
         """Returning a user instance based on a received request"""
         auth_header = self.authorization_header(request)
         if auth_header is not None:
-            tk = self.extract_base64_authorization_header(auth_header)
-            if tk is not None:
-                dcoded = self.decode_base64_authorization_header(tk)
+            token = self.extract_base64_authorization_header(auth_header)
+            if token is not None:
+                dcoded = self.decode_base64_authorization_header(token)
                 if dcoded is not None:
                     email, passwd = self.extract_user_credentials(dcoded)
                     if email is not None:
