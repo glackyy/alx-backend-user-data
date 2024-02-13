@@ -8,3 +8,10 @@ from api.v1.views import app_views
 def status() -> str:
     """Getting api/v1/status"""
     return jsonify({"status": "OK"})
+
+
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def authorized() -> str:
+    """Getting /api/v1/unauthorized"""
+    abort(401, description="Unauthorized")
+
