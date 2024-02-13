@@ -26,3 +26,17 @@ class Auth:
                 if i[-1] == "*":
                     if path.startswith(i[:-1]):
                         return False
+        return True
+
+    def authorization_header(self, request=None) -> str:
+        """Returning the Auth header from a request obj"""
+        if request is None:
+            return None
+        header = request.headers.get('Authorization')
+        if header is None:
+            return None
+        return header
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Returning a User instance from info from a request obj"""
+        return None
