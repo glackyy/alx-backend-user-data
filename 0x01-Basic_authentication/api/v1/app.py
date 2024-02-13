@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 """Route module for the API"""
 from os import getenv
-from flask import Flask, jsonify
-
+from flask import Flask
+from api.v1.views import app_views
+from flask_cors import (CORS, cross_origin)
+import os
 
 app = Flask(__name__)
-
-
-@app.route('/api/v1/status', methods=['GET'])
-def get_status():
-    return jsonify({"status": "OK"})
-
+app.register_blueprint(app_views)
+COr
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
