@@ -8,6 +8,7 @@ class SessionDBAuth(SessionExpAuth):
     """Defining a SessionDBAuth class that persists
     session data in db"""
     def create_session(self, user_id=None):
+        """Creating a Session id for a user"""
         session_id = super().create_session(user_id)
         if not session_id:
             return None
