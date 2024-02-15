@@ -2,7 +2,10 @@
 """SessionExpAuth class"""
 from .session_auth import SessionAuth
 import os
-from datetime import datetime
+from datetime import (
+    datetime,
+    timedelta
+)
 
 
 class SessionExpAuth(SessionAuth):
@@ -27,3 +30,20 @@ class SessionExpAuth(SessionAuth):
         }
         self.user_id_by_session_id[session_id] = session_dict
         return session_id
+
+    def user_id_for_session_id(self, session_id: None):
+        """Returning a user id based on a session id"""
+        if session_id is None:
+            return None
+        user_details = self.user_id_by_session_id.get(session_id)
+        if user_details is None:
+            return None
+        if "created_at" not in user_details.keys():
+            return None
+        if self.session_duration <= 0:
+            return user_details.get("user_id")
+        created_at = user_details.get("created_at")
+        allow_window = created_at + timedelta(seconds=self.session_duration)
+        if allow_window < datetime.now():
+            return None
+        return user_details.get("user_id")
