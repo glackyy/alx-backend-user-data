@@ -11,11 +11,11 @@ class SessionDBAuth(SessionExpAuth):
         session_id = super().create_session(user_id)
         if not session_id:
             return None
-        kwargs = {
+        kw = {
             "user_id": user_id,
             "session_id": session_id
         }
-        user = UserSession(**kwargs)
+        user = UserSession(**kw)
         user.save()
         return session_id
 
