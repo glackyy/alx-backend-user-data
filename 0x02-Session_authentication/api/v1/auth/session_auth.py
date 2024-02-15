@@ -2,3 +2,6 @@
 """SessionAuth Class"""
 from .auth import Auth
 
+
+class SessionAuth(Auth):
+    """"""
