@@ -18,3 +18,10 @@ class SessionDBAuth(SessionExpAuth):
         user = UserSession(**kwargs)
         user.save()
         return session_id
+
+    def user_id_for_session_id(self, session_id: None):
+        """Returning a user id based on a session id"""
+        user_id = UserSession.search({"session_id": session_id})
+        if user_id:
+            return user_id
+        return None
