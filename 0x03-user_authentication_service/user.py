@@ -8,3 +8,4 @@ from sqlalchemy import (
 )
 
 Base = declarative_base()
+
