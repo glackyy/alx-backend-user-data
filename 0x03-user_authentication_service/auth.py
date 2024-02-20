@@ -6,6 +6,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
 
+
 def _hash_password(password: str) -> bytes:
     """Hashing a passwd str and returning it in bytes"""
     passwd = password.encode('utf-8')
