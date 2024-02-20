@@ -36,4 +36,3 @@ class DB:
         self.__session.add(user)
         self.__session.commit()
         return user
-    
