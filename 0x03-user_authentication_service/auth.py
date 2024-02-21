@@ -3,6 +3,7 @@
 import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
 
+from typing import Union
 from db import DB
 from user import User
 from uuid import uuid4
@@ -46,3 +47,14 @@ class Auth:
         user_pwd = user.hashed_password
         passwd = password.encode("utf-8")
         return bcrypt.checkpw(passwd, user_pwd)
+
+    def create_session(self, email: str) -> Union[None, str]:
+        """Creating a session_id for an existing user and
+        updating the user's session_id"""
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return None
+        session_id = _generate_uuid()
+        self._db.update_user(user.id, session_id=session_id)
+        return session_id
