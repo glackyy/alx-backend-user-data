@@ -67,7 +67,7 @@ def profile() -> str:
     abort(403)
 
 
-@app.route("/reset_password", methods=["POST"], strict_flashes=False)
+@app.route("/reset_password", methods=["POST"], strict_slashes=False)
 def get_reset_password_token() -> str:
     """Generating a token for resetting a user's password"""
     email = request.form.get("email")
