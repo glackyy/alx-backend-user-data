@@ -82,8 +82,8 @@ class Auth:
         return None
 
     def get_reset_password_token(self, email: str) -> str:
-        """Generating a reset_token uuid for a user identified
-        by the given email"""
+        """Generating a reset_token uuid for a user
+        identified by the given email"""
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
