@@ -61,3 +61,16 @@ def reset_password_token(email: str) -> str:
     if resp.status_code == 200:
         return resp.json()['reset_token']
     assert (resp.status_code == 401)
+
+def update_password(email: str, reset_token: str,
+                    new_password: str) -> str:
+    """Testing for update password with the given
+    email, reset_token, new_password"""
+    data = {'email': email, 'reset_token': reset_token,
+            'new_password': new_password}
+    resp = requests.put('http://127.0.0.1:5000/reset_password',
+                        data=data)
+    if resp.status_code == 200:
+        assert (resp.json() == {"email": email, "message": "Password updated"})
+    else:
+        assert (resp.status_code == 203)
