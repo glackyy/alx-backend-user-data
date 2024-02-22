@@ -29,19 +29,22 @@ def log_in(email: str, password: str) -> str:
     assert (res.json() == {"email": email, "message": "logged in"})
     assert res.cookies['session_id']
 
+
 def profile_unlogged() -> str:
     """Testing for profile without being logged in with
     session id"""
     resp = requests.get('http://127.0.0.1:5000/profile')
     assert (resp.status_code == 403)
 
+
 def profile_logged(session_id: str) -> None:
     """Testing for profile with being logged in
     with session id"""
-    cookies =  {'session_id': session_id}
+    cookies = {'session_id': session_id}
     resp = requests.delete('http://127.0.0.1:5000/profile',
                            cookies=cookies)
     assert (resp.status_code == 200)
+
 
 def log_out(session_id: str) -> None:
     """Testing for log out with the given session_id"""
@@ -53,6 +56,7 @@ def log_out(session_id: str) -> None:
     else:
         assert (resp.status_code == 200)
 
+
 def reset_password_token(email: str) -> str:
     """Testing for rest password token with the given
     email"""
@@ -61,6 +65,7 @@ def reset_password_token(email: str) -> str:
     if resp.status_code == 200:
         return resp.json()['reset_token']
     assert (resp.status_code == 401)
+
 
 def update_password(email: str, reset_token: str,
                     new_password: str) -> str:
