@@ -34,3 +34,11 @@ def profile_unlogged() -> str:
     session id"""
     resp = requests.get('http://127.0.0.1:5000/profile')
     assert (resp.status_code == 403)
+
+def profile_logged(session_id: str) -> None:
+    """Testing for profile with being logged in
+    with session id"""
+    cookies =  {'session_id': session_id}
+    resp = requests.delete('http://127.0.0.1:5000/profile',
+                           cookies=cookies)
+    assert (resp.status_code == 200)
