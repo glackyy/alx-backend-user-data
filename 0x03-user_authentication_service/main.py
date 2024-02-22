@@ -28,3 +28,9 @@ def log_in(email: str, password: str) -> str:
     assert (res.status_code == 200)
     assert (res.json() == {"email": email, "message": "logged in"})
     assert res.cookies['session_id']
+
+def profile_unlogged() -> str:
+    """Testing for profile without being logged in with
+    session id"""
+    resp = requests.get('http://127.0.0.1:5000/profile')
+    assert (resp.status_code == 403)
