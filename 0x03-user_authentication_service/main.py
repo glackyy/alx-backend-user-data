@@ -19,3 +19,12 @@ def log_in_wrong_password(email: str, password: str) -> None:
     response = requests.post('http://127.0.0.1:5000/sessions',
                              data={'email': email, 'password': password})
     assert (response.status_code == 401)
+
+
+def log_in(email: str, password: str) -> str:
+    """Testing log in with the correct credentials"""
+    res = requests.post('http://127.0.0.1:5000/sessions',
+                        data={'email': email, 'password': password})
+    assert (res.status_code == 200)
+    assert (res.json() == {"email": email, "message": "logged in"})
+    assert res.cookies['session_id']
