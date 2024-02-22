@@ -42,3 +42,13 @@ def profile_logged(session_id: str) -> None:
     resp = requests.delete('http://127.0.0.1:5000/profile',
                            cookies=cookies)
     assert (resp.status_code == 200)
+
+def log_out(session_id: str) -> None:
+    """Testing for log out with the given session_id"""
+    cookies = {'session_id': session_id}
+    resp = requests.delete('http://127.0.0.1:5000/sessions',
+                           cookies=cookies)
+    if resp.status_code == 302:
+        assert (resp.url == 'http://127.0.0.1:5000/')
+    else:
+        assert (resp.status_code == 200)
