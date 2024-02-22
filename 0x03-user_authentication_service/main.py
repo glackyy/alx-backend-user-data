@@ -12,3 +12,10 @@ def register_user(email: str, password: str) -> None:
     else:
         assert(res.status_code == 400)
         assert (res.json() == {"message": "email already registered"})
+
+
+def log_in_wrong_password(email: str, password: str) -> None:
+    """Testing login with the given wrong credentials"""
+    response = requests.post('http://127.0.0.1:5000/sessions',
+                             data={'email': email, 'password': password})
+    assert (response.status_code == 401)
