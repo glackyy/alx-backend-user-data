@@ -52,3 +52,12 @@ def log_out(session_id: str) -> None:
         assert (resp.url == 'http://127.0.0.1:5000/')
     else:
         assert (resp.status_code == 200)
+
+def reset_password_token(email: str) -> str:
+    """Testing for rest password token with the given
+    email"""
+    resp = requests.post('http://127.0.0.1:5000/reset_password',
+                         data={'email': email})
+    if resp.status_code == 200:
+        return resp.json()['reset_token']
+    assert (resp.status_code == 401)
