@@ -10,7 +10,7 @@ def register_user(email: str, password: str) -> None:
     if res.status_code == 200:
         assert (res.json() == {"email": email, "message": "user created"})
     else:
-        assert(res.status_code == 400)
+        assert (res.status_code == 400)
         assert (res.json() == {"message": "email already registered"})
 
 
